@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
+                    <!--名字-->
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -24,7 +24,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                    <!--邮箱-->
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
@@ -38,7 +38,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                    <!--密码-->
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
@@ -52,7 +52,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                    <!--确认密码-->
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
@@ -61,6 +61,25 @@
                             </div>
                         </div>
 
+                    <!--验证码-->
+                        <div class="mb-3 row">
+                          <label for="captcha" class="col-md-4 col-form-label text-md-end">验证码</label>
+
+                          <div class="col-md-6">
+                            <input id="captcha" class="form-control{{ $errors->has('captcha') ? ' is-invalid' : '' }}" name="captcha" required>
+
+                            <img class="thumbnail captcha mt-3 mb-2" src="{{ captcha_src('flat') }}" onclick="this.src='/captcha/flat?'+Math.random()" title="点击图片重新获取验证码">
+
+                            @if ($errors->has('captcha'))
+                              <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('captcha') }}</strong>
+                              </span>
+                            @endif
+                          </div>
+                        </div>
+                        
+                        
+                    <!--注册-->
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
