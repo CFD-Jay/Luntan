@@ -19,6 +19,7 @@ class VerificationController extends Controller
     |
     */
 
+    //该trait在vector\ui\auth..
     use VerifiesEmails;
 
     /**
@@ -35,8 +36,11 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
+        //设置所有控制器都需要登录
         $this->middleware('auth');
+        //设置只有verify需要signed认证
         $this->middleware('signed')->only('verify');
+        //...并且设置一分钟不能超过六次
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 }

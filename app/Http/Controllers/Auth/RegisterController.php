@@ -22,7 +22,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers;         //源文件在Vector/laravel/ui/auth../RegistersUsers,其定义了命名空间namespace App\Http\Controllers\Auth;
 
     /**
      * Where to redirect users after registration.
