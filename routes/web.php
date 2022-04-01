@@ -41,4 +41,9 @@ Route::resource('users','UsersController',['only'=>['show','edit','update']]);
 // Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 
 
+
+//帖子相关
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+
+//显示每种话题的帖子
+Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
