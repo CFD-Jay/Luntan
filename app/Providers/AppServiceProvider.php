@@ -25,7 +25,9 @@ class AppServiceProvider extends ServiceProvider
 	{
 		\App\Models\User::observe(\App\Observers\UserObserver::class);
 		\App\Models\Topic::observe(\App\Observers\TopicObserver::class);
-
+		
+		//设置使用bootstrap样式，不引用样式会错乱，如分页。
+         \Illuminate\Pagination\Paginator::useBootstrap();
         //
     }
 }
