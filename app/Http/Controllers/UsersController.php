@@ -8,6 +8,11 @@ use App\Http\Requests\UserRequest;
 use App\Handlers\ImageUploadHandler; //自定义的处理图片的文件
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth',['except'=>['show']]);
+    }
+    
     //展示用户界面
     public function show(User $user)
     {
@@ -16,6 +21,8 @@ class UsersController extends Controller
     //展示用户编辑界面
     public function edit(User $user)
     {
+        //编辑和更新操作都只能操作自己
+        $this->authorize('update',$user);
         return view('users.edit', compact('user'));
     }
     
@@ -23,6 +30,7 @@ class UsersController extends Controller
     
         public function update(UserRequest $request,ImageUploadHandler $uploader, User $user)
         {
+            $this->authorize('update',$user);
             $data=$request->all();
             if ($request->avatar) {
             $result = $uploader->save($request->avatar, 'avatars', $user->id,416);      //save是ImageUploadHandler的函数，它返回一个路径
