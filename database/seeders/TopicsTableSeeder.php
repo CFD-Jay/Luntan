@@ -9,7 +9,8 @@ class TopicsTableSeeder extends Seeder
 {
     public function run()
     {
-        Topic::factory()->count(10)->create();
+        //生成100个假帖子
+        Topic::factory()->count(100)->create();
     }
 }
 
