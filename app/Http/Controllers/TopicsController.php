@@ -16,7 +16,10 @@ class TopicsController extends Controller
 
 	public function index()
 	{
-		$topics = Topic::paginate();
+	    //在index视图里遍历了topics，并且因为topics关联了user和category,所以提前用with()进行缓冲可大大减少查询时间,防止N+1问题。
+	    //遇到关联表的遍历记得用with缓冲
+	    //
+		$topics = Topic::with('user','category')->paginate();
 		return view('topics.index', compact('topics'));
 	}
 
