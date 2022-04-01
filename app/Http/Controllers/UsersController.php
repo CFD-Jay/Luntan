@@ -25,7 +25,7 @@ class UsersController extends Controller
         {
             $data=$request->all();
             if ($request->avatar) {
-            $result = $uploader->save($request->avatar, 'avatars', $user->id);      //save是ImageUploadHandler的函数，它返回一个路径
+            $result = $uploader->save($request->avatar, 'avatars', $user->id,416);      //save是ImageUploadHandler的函数，它返回一个路径
            
             if ($result) {
                 $data['avatar'] = $result['path'];
