@@ -13,13 +13,16 @@ class TopicsController extends Controller
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
-
-	public function index()
+    
+    //加入Topic $topic在里面使用$topic->.... 否则是Topic::...
+	public function index(Request $request, Topic $topic)
 	{
 	    //在index视图里遍历了topics，并且因为topics关联了user和category,所以提前用with()进行缓冲可大大减少查询时间,防止N+1问题。
 	    //遇到关联表的遍历记得用with缓冲
-	    //
-		$topics = Topic::with('user','category')->paginate();
+	  
+		$topics = $topic->withOrder($request->order) //传递给withOrder order(排序顺序)来决定排序顺序
+		->with('user','category')->paginate(20);
+	
 		return view('topics.index', compact('topics'));
 	}
 
@@ -60,4 +63,25 @@ class TopicsController extends Controller
 
 		return redirect()->route('topics.index')->with('message', 'Deleted successfully.');
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
