@@ -8,7 +8,7 @@ class Topic extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['title', 'body', 'user_id', 'category_id', 'reply_count', 'view_count', 'last_reply_user_id', 'order', 'excerpt', 'slug'];
+    protected $fillable = ['title', 'body',  'category_id',  'excerpt', 'slug'];
     
     
     
@@ -30,7 +30,7 @@ class Topic extends Model
     
     
     
-    public function   scopeWithOrder($query,$order)
+    public function  scopeWithOrder($query,$order)
     {
         switch ($order) {
             case 'recent':
@@ -44,14 +44,17 @@ class Topic extends Model
         
     }
     
-    public function scoperecent($query)
+     public function scopeRecentReplied($query)
     {
-        return $query->orderBy('created_at','desc');
+        // 当话题有新回复时，我们将编写逻辑来更新话题模型的 reply_count 属性，
+        // 此时会自动触发框架对数据模型 updated_at 时间戳的更新
+        return $query->orderBy('updated_at', 'desc');
     }
-     public function scoperecentReplied($query)
+
+    public function scopeRecent($query)
     {
-        return $query->orderBy('updated_at','desc');
+        // 按照创建时间排序
+        return $query->orderBy('created_at', 'desc');
     }
-    
     
 }

@@ -19,4 +19,6 @@ class CategoriesController extends Controller
         // 传参变量话题和分类到模板中
         return view('topics.index', compact('topics', 'category'));
     }
+    
+    
 }
