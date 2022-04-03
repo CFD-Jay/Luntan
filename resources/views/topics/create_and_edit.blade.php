@@ -1,4 +1,6 @@
 
+
+
 @extends('layouts.app')
 @section('content')
 
@@ -56,3 +58,42 @@
   </div>
 
 @endsection
+
+
+
+
+@section('styles')
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/simditor.css') }}">
+@stop
+
+
+
+<!--引用simditor更改上传帖子视图-->
+@section('scripts')
+<!--若是报$ is not a function（F12），则是没有引用jquery文件，而且该文件要首先引用-->
+<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/module.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/hotkeys.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/uploader.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/simditor.js') }}"></script>
+
+  <script>
+    $(document).ready(function() {
+      var editor = new Simditor({
+        textarea: $('#editor'),
+      });
+    });
+  </script>
+@stop
+<!---->
+
+
+
+
+
+
+
+
+
+
+
