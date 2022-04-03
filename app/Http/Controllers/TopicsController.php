@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
 use App\Models\Category;
 use Auth;
+use App\Handlers\ImageUploadHandler;
 class TopicsController extends Controller
 {
     public function __construct()
@@ -72,9 +73,38 @@ class TopicsController extends Controller
 
 		return redirect()->route('topics.index')->with('message', 'Deleted successfully.');
 	}
-	
-//发布和编辑帖子
 
+
+
+
+    //贴子上传图片
+    public function uploadImage(Request $request,ImageUploadHandler $uploader)
+    {
+        //这么引用是错误的，要写在形参里
+        //ImageUploadHandler $uploader;
+        
+        // 初始化返回数据，默认是失败的
+        $data = [
+            'success'   => false,
+            'msg'       => '上传失败!',
+            'file_path' => ''
+        ];
+        // 判断是否有上传文件，并赋值给 $file
+        if ($file = $request->upload_file) {
+            // 保存图片到本地
+            $result = $uploader->save($file, 'topics', \Auth::id(), 1024);
+            // 图片保存成功的话
+            dd($result);
+            if ($result) {
+                $data['file_path'] = $result['path'];
+                $data['msg']       = "上传成功!";
+                $data['success']   = true;
+            }
+        }
+        
+        //返回数组会自动转化为json数据给create_and_edit中
+        return $data;
+    }
 	
 	
 	

@@ -71,16 +71,30 @@
 <!--引用simditor更改上传帖子视图-->
 @section('scripts')
 <!--若是报$ is not a function（F12），则是没有引用jquery文件，而且该文件要首先引用-->
-<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/module.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/hotkeys.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/uploader.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/simditor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/module.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/hotkeys.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/uploader.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/simditor.js') }}"></script>
 
   <script>
     $(document).ready(function() {
       var editor = new Simditor({
         textarea: $('#editor'),
+        
+        upload: {
+            
+          url: '{{ route('topics.upload_image') }}',        //上传图片的路由
+          params: {
+            _token: '{{ csrf_token() }}'
+          },
+          fileKey: 'upload_file',       //是服务器端获取图片的键值，我们设置为 upload_file
+          connectionCount: 3,               //最多能上传的图片数
+          leaveConfirm: '文件上传中，关闭此页面将取消上传。'
+        },
+        
+        
+        pasteImage: true,       //设置图片是否支持黏贴上传
       });
     });
   </script>
