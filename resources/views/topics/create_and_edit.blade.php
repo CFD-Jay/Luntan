@@ -19,7 +19,7 @@
           </h2>
 
           <hr>
-
+                <!--根据编辑还是新建传递不同的路由-->
           @if($topic->id)
             <form action="{{ route('topics.update', $topic->id) }}" method="POST" accept-charset="UTF-8">
               <input type="hidden" name="_method" value="PUT">
@@ -37,9 +37,11 @@
 
               <div class="form-group">
                 <select class="form-control" name="category_id" required>
-                  <option value="" hidden disabled selected>请选择分类</option>
+                   <option value="" hidden disabled {{ $topic->id ? '' : 'selected' }}>请选择分类</option>
                   @foreach ($categories as $value)
-                  <option value="{{ $value->id }}">{{ $value->name }}</option>
+                  
+                  <!--如果传过来的topic种类等于某个值，就要被选中（编辑情况）-->
+                  <option value="{{ $value->id }}" {{$topic->category_id==$value->id? 'selected':''}}>   {{ $value->name }}</option>
                   @endforeach
                 </select>
               </div>
