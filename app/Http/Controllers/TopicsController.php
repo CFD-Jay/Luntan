@@ -28,12 +28,17 @@ class TopicsController extends Controller
 		return view('topics.index', compact('topics'));
 	}
 
-
-    public function show(Topic $topic)
+    //
+    public function show(Request $request, Topic $topic)
     {
+        // URL 矫正
+        //因为现在显示帖子的路由带有slug，所以注入Request来获取路由中的slug
+        if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
+            return redirect($topic->link(), 301);            //永久重定向到正确的路由上
+        }
+
         return view('topics.show', compact('topic'));
     }
-
 
 	public function create(Topic $topic)
     {

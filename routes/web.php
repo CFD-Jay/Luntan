@@ -43,7 +43,9 @@ Route::resource('users','UsersController',['only'=>['show','edit','update']]);
 
 
 //帖子相关
-Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
+//自定义show帖子路由，使其能显示slug
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 
 //显示每种话题的帖子
 Route::resource('categories', 'CategoriesController', ['only' => ['show']]);

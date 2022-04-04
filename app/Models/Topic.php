@@ -57,4 +57,18 @@ class Topic extends Model
         return $query->orderBy('created_at', 'desc');
     }
     
+    
+    
+    
+    
+    //获取帖子的slug，并将其显示在url上
+    //修改topic.show Eg：return redirect()->route('topics.show', $topic->id)->with('success', '成功创建话题！');==>return redirect()->to($topic->link())->with('success', '成功创建话题！');
+    public function link($params = [])
+    {
+        return route('topics.show', array_merge([$this->id, $this->slug], $params));
+    }
+    
+    
+    
+    
 }

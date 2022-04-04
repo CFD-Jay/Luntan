@@ -5,7 +5,7 @@
   <ul class="list-group mt-4 border-0">
     @foreach ($topics as $topic)
       <li class="list-group-item pl-2 pr-2 border-right-0 border-left-0 @if($loop->first) border-top-0 @endif">
-        <a class="text-decoration-none" href="{{ route('topics.show', $topic->id) }}">
+        <a class="text-decoration-none" href="{{ $topic->link() }}">  <!--topic模型定义的函数，返回一个带给slug的url-->
           {{ $topic->title }}
         </a>
         <span class="meta float-right text-secondary" style="float:right">
