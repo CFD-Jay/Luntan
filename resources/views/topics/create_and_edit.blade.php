@@ -81,20 +81,16 @@
     $(document).ready(function() {
       var editor = new Simditor({
         textarea: $('#editor'),
-        
         upload: {
-            
-          url: '{{ route('topics.upload_image') }}',        //上传图片的路由
+          url: '{{ route('topics.upload_image') }}',    //触发路由，该路由会调用控制器中的函数返回json.
           params: {
             _token: '{{ csrf_token() }}'
           },
-          fileKey: 'upload_file',       //是服务器端获取图片的键值，我们设置为 upload_file
-          connectionCount: 3,               //最多能上传的图片数
-          leaveConfirm: '文件上传中，关闭此页面将取消上传。'
+          fileKey: 'upload_file',
+          connectionCount: 3,                   //最大上传数
+          leaveConfirm: '文件上传中，关闭此页面将取消上传。'  
         },
-        
-        
-        pasteImage: true,       //设置图片是否支持黏贴上传
+        pasteImage: true,                   //图片黏贴上传
       });
     });
   </script>

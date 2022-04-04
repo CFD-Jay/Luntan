@@ -28,10 +28,12 @@ class TopicsController extends Controller
 		return view('topics.index', compact('topics'));
 	}
 
+
     public function show(Topic $topic)
     {
         return view('topics.show', compact('topic'));
     }
+
 
 	public function create(Topic $topic)
     {
@@ -94,7 +96,7 @@ class TopicsController extends Controller
             // 保存图片到本地
             $result = $uploader->save($file, 'topics', \Auth::id(), 1024);
             // 图片保存成功的话
-            dd($result);
+           
             if ($result) {
                 $data['file_path'] = $result['path'];
                 $data['msg']       = "上传成功!";
