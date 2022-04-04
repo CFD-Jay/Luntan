@@ -77,6 +77,10 @@
     <script type="text/javascript" src="{{ asset('js/uploader.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/simditor.js') }}"></script>
 
+
+<!--Simditor调用部分-->
+<!--注意，Simditor会过滤XXS攻击-->
+
   <script>
     $(document).ready(function() {
       var editor = new Simditor({
@@ -94,6 +98,8 @@
       });
     });
   </script>
+  
+  
 @stop
 <!---->
 

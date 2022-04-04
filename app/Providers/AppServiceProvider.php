@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
 		
 		//设置使用bootstrap样式，不引用样式会错乱，如分页。
          \Illuminate\Pagination\Paginator::useBootstrap();
+
         //
     }
 }
