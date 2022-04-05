@@ -3,37 +3,31 @@
 namespace App\Observers;
 
 use App\Models\Topic;
-use App\Handlers\SlugTranslateHandler;
+use App\Jobs\TranslateSlug;
+
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored
 
 class TopicObserver
 {
-    public function creating(Topic $topic)
-    {
-        //
-    }
-
-    public function updating(Topic $topic)
-    {
-        //
-    }
-    
-    //数据库入库前（存入topic）
     public function saving(Topic $topic)
     {
-        //通过purifier过滤XXS。在配置文件config/purifier.php
-        //注意注意 开了Simditor该过滤失效
-         $topic->body = clean($topic->body, 'user_topic_body');
-        
-        //make_excerpt是定义在helpers的函数，根据topic的body生成excerpt.
-        $topic->excerpt=make_excerpt($topic->body);
-        
-        
-        //如果slug为空，则使用百度翻译接口翻译
-         if ( ! $topic->slug) {
-            $topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
+        // XSS 过滤
+        $topic->body = clean($topic->body, 'user_topic_body');
+
+        // 生成话题摘录
+        $topic->excerpt = make_excerpt($topic->body);
+    }
+
+
+    //注意调用队列要在saved后，否则$topic->id没有值
+    public function saved(Topic $topic)
+    {
+        // 如 slug 字段无内容，即使用翻译器对 title 进行翻译
+        if ( ! $topic->slug) {
+
+            // 推送任务到队列
+            dispatch(new TranslateSlug($topic));
         }
     }
-    
 }
