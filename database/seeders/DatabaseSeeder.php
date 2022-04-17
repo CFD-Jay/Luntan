@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         //假帖子生成
         $this->call(TopicsTableSeeder::class);
+        //假回复生成
+        $this->call(RepliesTableSeeder::class);
     }
 }

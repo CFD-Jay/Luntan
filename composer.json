@@ -17,7 +17,8 @@
         "mews/purifier": "~3.3",
         "overtrue/laravel-lang": "~5.0",
         "predis/predis": "~1.1",
-        "summerblue/laravel-active": "8.*"
+        "summerblue/laravel-active": "8.*",
+        "zhuzhichao/ip-location-zh": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "~3.5",

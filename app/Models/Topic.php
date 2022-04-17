@@ -24,7 +24,11 @@ class Topic extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    
+    //一个帖子有多个评论
+     public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
     
     
     

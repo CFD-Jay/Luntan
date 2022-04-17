@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"><!--app()->getLocale()是获取app的locale值（zh_CH）-->
 
