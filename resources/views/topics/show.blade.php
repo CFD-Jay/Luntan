@@ -64,6 +64,19 @@
 
         </div>
       </div>
+
+       {{-- 用户回复列表 --}}
+      <div class="card topic-reply mt-4">
+          <div class="card-body">
+              <!--当用户登录时才能回复-->
+              @includeWhen(Auth::check(), 'topics._reply_box', ['topic' => $topic])
+              <!--避免N+1问题-->
+              @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->get()])
+          </div>
+      </div>
+      
+      
+      
     </div>
   </div>
 @stop

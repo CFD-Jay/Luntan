@@ -1,13 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
+
+
+<?php  
+
+?>
+<nav class="navbar navbar-expand-md navbar-light bg-light mt-1">
   <div class="container">
     <!-- Branding Image -->
     <a class="navbar-brand " href="{{ url('/') }}">
       LaraBBS
     </a>
- 
-
+    
+            <button class="btn btn-default" type="button" data-bs-toggle="collapse" data-bs-target="#s">Topics</button>
       <!-- Left Side Of Navbar -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse " id="s">
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item {{ active_class(if_route('topics.index')) }}"><a class="nav-link" href="{{ route('topics.index') }}">话题</a></li>
@@ -16,9 +21,7 @@
         <li class="nav-item {{ category_nav_active(3) }}"><a class="nav-link" href="{{ route('categories.show', 3) }}">问答</a></li>
         <li class="nav-item {{ category_nav_active(4) }}"><a class="nav-link" href="{{ route('categories.show', 4) }}">公告</a></li>
       </ul>
-      </div>
-      
-    
+    </div>
     <div  id="navbarSupportedContent">
       <ul class="navbar-nav navbar-right">
         <!-- Authentication Links -->
@@ -26,7 +29,14 @@
           <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
         @else
-        
+        <!--回复通知-->
+          <li class="nav-item notification-badge">
+            <a class="nav-link ms-3 me-3 badge bg-secondary rounded-pill badge-{{ Auth::user()->notification_count > 0 ? 'hint' : 'secondary' }} text-white" href="{{ route('notifications.index') }}">
+              {{ Auth::user()->notification_count }}
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+              
         <!--发帖入口-->
           <li class="nav-item">
             <a class="nav-link mt-1 mr-3 font-weight-bold" href="{{ route('topics.create') }}">

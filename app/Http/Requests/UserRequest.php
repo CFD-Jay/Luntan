@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
        return [
-            'name' => 'required|between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,' . Auth::id(),//名字在users表是独一无二的，（除了自己）.
+            'name' => 'required|between:2,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,' . Auth::id(),//名字在users表是独一无二的，（除了自己）.
             'email' => 'required|email',
             'introduction' => 'max:80',
             'avatar'=>'mimes:jpg,png,jpeg,gif|dimensions:min_weight=208,min_height=208',

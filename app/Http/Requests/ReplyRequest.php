@@ -6,6 +6,10 @@ class ReplyRequest extends Request
 {
     public function rules()
     {
+        //回复至少有两个字符
+         return [
+            'content' => 'required|min:2',
+        ];
         switch($this->method())
         {
             // CREATE
@@ -35,7 +39,8 @@ class ReplyRequest extends Request
     public function messages()
     {
         return [
-            // Validation messages
+            'content.required' => '内容不能为空',
+            'content.min' => '内容必须至少两个字符',
         ];
     }
 }

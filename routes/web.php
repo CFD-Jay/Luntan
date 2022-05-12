@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
+
 Route::get('/', 'PagesController@root')->name('root');
 
 
-
+Route::get('/test','PagesController@test')->name('test');
 
 
 // 用户身份验证相关的路由
@@ -52,4 +54,7 @@ Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 
 //发布帖子上传图片的路由
 Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
-Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]);
+
+//回复通知
+Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);

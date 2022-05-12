@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Observers;
-
+use DB;
 use App\Models\Topic;
 use App\Jobs\TranslateSlug;
 
@@ -30,4 +30,10 @@ class TopicObserver
             dispatch(new TranslateSlug($topic));
         }
     }
+    //当话题被删除时，回复也应该删除
+    public function deleted(Topic $topic)
+    {
+        DB::table("replies")->where('topic_id',$topic->id)->delete();
+    }
+    
 }
